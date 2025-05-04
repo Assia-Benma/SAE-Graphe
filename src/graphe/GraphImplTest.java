@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GraphImplTest {
+class GraphImpITest {
 
     private GraphImpl<String> grapheString;
     private GraphImpl<Integer> grapheInteger;
