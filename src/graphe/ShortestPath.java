@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
-@FunctionalInterface
+
 public interface ShortestPath<T> {
 	/**
 	 * Permet de personnaliser l'animation de l'algorithme.
@@ -62,21 +62,20 @@ public interface ShortestPath<T> {
 
 	/**
 	 * Calcul des plus courts chemins.
-	 * 
 	 * @param <T>      Identifiant des sommets. Le type doit être "hachable".
 	 * @param g        Le graphe pour lequel le calcul est demandé.
 	 * @param src      Le sommet de {@code g} à partir duquel les plus courts chemins
 	 *                 sont demandés.
-	 * @param animator L'animateur du parcours. Il est invoqué chaque fois qu'une 
-	 *                 distance est connue.           
+	 * @param animator L'animateur du parcours. Il est invoqué chaque fois qu'une
+	 *                 distance est connue.
 	 * @return Une instance de {@code Resultat<T>} contenant tous les résultats.
 	 */
-	Distances<T> compute(Graph<T> g, T src, Animator<T> animator) throws IllegalArgumentException;
+	Distances<T> compute(Graph.graph<T> g, T src, Animator<T> animator) throws IllegalArgumentException;
 	
 	/**
 	 * Calcul des plus courts chemins sans animation.
 	 */
-	default Distances<T> compute(Graph<T> g, T src) throws IllegalArgumentException {
+	default Distances<T> compute(Graph.graph<T> g, T src) throws IllegalArgumentException {
 		return compute(g, src, (n, d) -> {});
 	}
 }

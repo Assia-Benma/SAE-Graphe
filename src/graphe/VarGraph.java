@@ -28,4 +28,4 @@ public interface VarGraph extends Graph.graph<String> {
 			}
 		}
 	}
-	}
+}

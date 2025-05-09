@@ -3,7 +3,7 @@ package graphe;
 // ajouterSommet ne fait rien si un sommet est deja present
 // ajouterArc leve une IllegalArgumentException si l'arc est deja present
 // ajouterArc ajoute les sommets s'ils ne sont pas deja presents
-public interface VarGraphImpl extends VarGraph<String> {
+public interface VarGraphImpl extends VarGraph {
     void ajouterSommet(String noeud);
     void ajouterArc(String source, String destination, Integer valeur);
 
