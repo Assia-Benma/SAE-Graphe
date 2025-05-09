@@ -10,7 +10,7 @@ public class GraphImpl<T> implements Graph.graph<T> {
     }
 
     //ajouterSommet
-    public void ajouterSommet(T s){
+    public void addNode(T s){
         listeAdjacence.putIfAbsent(s, new ArrayList<>());
     }
 
@@ -18,11 +18,15 @@ public class GraphImpl<T> implements Graph.graph<T> {
     * parametres source destination et valuation
     *
      */
-    public void ajouterArc(T source, T destination, int valuation){
-        ajouterSommet(source);
-        ajouterSommet(destination);
+    public void addEdge(T source, T destination, int valuation){
+        addNode(source);
+        addNode(destination);
         listeAdjacence.get(source).add(new Arc<>(valuation,destination));
 
+    }
+
+    public boolean checkIfNodeExistInGraph(T node){
+        return listeAdjacence.containsKey(node);
     }
 
     @Override

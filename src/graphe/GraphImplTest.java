@@ -23,8 +23,8 @@ class GraphImpITest {
     @DisplayName("Test ajout de sommets")
     void testAjouterSommet() {
         // Test avec des String
-        grapheString.ajouterSommet("A");
-        grapheString.ajouterSommet("B");
+        grapheString.addNode("A");
+        grapheString.addNode("B");
 
         // Vérifier que les sommets existent en vérifiant getSucc
         assertNotNull(grapheString.getSucc("A"));
@@ -37,9 +37,9 @@ class GraphImpITest {
     @DisplayName("Test ajout d'arcs")
     void testAjouterArc() {
         // Ajouter des arcs
-        grapheString.ajouterArc("A", "B", 5);
-        grapheString.ajouterArc("A", "C", 10);
-        grapheString.ajouterArc("B", "C", 3);
+        grapheString.addEdge("A", "B", 5);
+        grapheString.addEdge("A", "C", 10);
+        grapheString.addEdge("B", "C", 3);
 
         // Vérifier les successeurs de A
         List<Graph.graph.Arc<String>> succA = grapheString.getSucc("A");
@@ -65,7 +65,7 @@ class GraphImpITest {
     @Test
     @DisplayName("Test getSucc avec sommet inexistant")
     void testGetSuccSommetInexistant() {
-        grapheString.ajouterArc("A", "B", 5);
+        grapheString.addEdge("A", "B", 5);
 
         // Un sommet qui n'existe pas doit retourner une liste vide
         List<Graph.graph.Arc<String>> succZ = grapheString.getSucc("Z");
@@ -76,9 +76,9 @@ class GraphImpITest {
     @Test
     @DisplayName("Test avec des entiers")
     void testAvecEntiers() {
-        grapheInteger.ajouterArc(1, 2, 10);
-        grapheInteger.ajouterArc(2, 3, 20);
-        grapheInteger.ajouterArc(1, 3, 30);
+        grapheInteger.addEdge(1, 2, 10);
+        grapheInteger.addEdge(2, 3, 20);
+        grapheInteger.addEdge(1, 3, 30);
 
         List<Graph.graph.Arc<Integer>> succ1 = grapheInteger.getSucc(1);
         assertEquals(2, succ1.size());
@@ -92,11 +92,11 @@ class GraphImpITest {
     @Test
     @DisplayName("Test ajout de sommets déjà existants")
     void testAjouterSommetExistant() {
-        grapheString.ajouterSommet("A");
-        grapheString.ajouterArc("A", "B", 5);
+        grapheString.addNode("A");
+        grapheString.addEdge("A", "B", 5);
 
         // Ajouter à nouveau le sommet A ne doit pas effacer ses arcs
-        grapheString.ajouterSommet("A");
+        grapheString.addNode("A");
 
         List<Graph.graph.Arc<String>> succA = grapheString.getSucc("A");
         assertEquals(1, succA.size());
@@ -107,8 +107,8 @@ class GraphImpITest {
     @DisplayName("Test arcs multiples entre mêmes sommets")
     void testArcsMultiples() {
         // Ajouter plusieurs arcs entre les mêmes sommets
-        grapheString.ajouterArc("A", "B", 5);
-        grapheString.ajouterArc("A", "B", 10);
+        grapheString.addEdge("A", "B", 5);
+        grapheString.addEdge("A", "B", 10);
 
         List<Graph.graph.Arc<String>> succA = grapheString.getSucc("A");
         assertEquals(2, succA.size());
@@ -128,7 +128,7 @@ class GraphImpITest {
     @Test
     @DisplayName("Test boucle sur un sommet")
     void testBoucle() {
-        grapheString.ajouterArc("A", "A", 5);
+        grapheString.addEdge("A", "A", 5);
 
         List<Graph.graph.Arc<String>> succA = grapheString.getSucc("A");
         assertEquals(1, succA.size());
@@ -146,9 +146,9 @@ class GraphImpITest {
     @Test
     @DisplayName("Test toString avec graphe simple")
     void testToStringGrapheSimple() {
-        grapheString.ajouterArc("A", "B", 5);
-        grapheString.ajouterArc("B", "C", 3);
-        grapheString.ajouterSommet("D"); // Sommet isolé
+        grapheString.addEdge("A", "B", 5);
+        grapheString.addEdge("B", "C", 3);
+        grapheString.addNode("D"); // Sommet isolé
 
         String result = grapheString.toString();
 
@@ -161,7 +161,7 @@ class GraphImpITest {
     @Test
     @DisplayName("Test avec valeurs négatives")
     void testValeursNegatives() {
-        grapheInteger.ajouterArc(1, 2, -5);
+        grapheInteger.addEdge(1, 2, -5);
 
         List<Graph.graph.Arc<Integer>> succ1 = grapheInteger.getSucc(1);
         assertEquals(1, succ1.size());
@@ -177,7 +177,7 @@ class GraphImpITest {
         for (String s1 : sommets) {
             for (String s2 : sommets) {
                 if (!s1.equals(s2)) {
-                    grapheString.ajouterArc(s1, s2, 1);
+                    grapheString.addEdge(s1, s2, 1);
                 }
             }
         }
@@ -195,7 +195,7 @@ class GraphImpITest {
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
                 if (i != j) {
-                    grapheInteger.ajouterArc(i, j, i + j);
+                    grapheInteger.addEdge(i, j, i + j);
                 }
             }
         }
