@@ -7,14 +7,14 @@ public class GrapheHHAdj implements VarGraph {
 	/*
 	 * Structure de donnee prenant en cle l'identifiant des sommets et comme valeur la liste des arcs sortant de chaque sommet
 	 */
-	private Map<String, List<Arc<String>>> listeAdjacence;
+	private Map<String, List<Graph.graph.Arc<String>>> listeAdjacence;
 
 	public GrapheHHAdj() {
 		listeAdjacence = new HashMap<>();
 	}
 
 	@Override
-	public List<Arc<String>> getSucc(String s) {
+	public List<Graph.graph.Arc<String>> getSucc(String s) {
 		return listeAdjacence.getOrDefault(s, Collections.emptyList());
 	}
 
@@ -27,31 +27,42 @@ public class GrapheHHAdj implements VarGraph {
 	public void ajouterArc(String source, String destination, Integer valeur) {
 		ajouterSommet(source);
 		ajouterSommet(destination);
-		listeAdjacence.get(source).add(new Arc<>(valeur, destination));
+		listeAdjacence.get(source).add(new Graph.graph.Arc<>(valeur, destination));
 	}
 
 	public boolean verifierExistenceSommet(String noeud) {
 		return listeAdjacence.containsKey(noeud);
 	}
+	public Set<String> getSommets() {
+		return listeAdjacence.keySet();
+	}
 
-	// au format "A-B(5), A-C(10), B-C(3), C-D(8), E:"
 	@Override
 	public String toString() {
+		if (listeAdjacence.isEmpty()) {
+			return "";
+		}
+
 		StringBuilder sb = new StringBuilder();
 		for (String sommet : listeAdjacence.keySet()) {
+			List<Graph.graph.Arc<String>> arcs = getSucc(sommet);
 			sb.append(sommet).append("-");
-			for (Arc<String> arc : getSucc(sommet)) {
-				if (getSucc(sommet) == null)
-					sb.append(" ");
-				else
-					sb.append(arc.dst()).append("(").append(arc.val()).append(") ");
+
+			if (!arcs.isEmpty()) {
+				for (int i = 0; i < arcs.size(); i++) {
+					Graph.graph.Arc<String> arc = arcs.get(i);
+					sb.append(arc.dst()).append("(").append(arc.val()).append(")");
+					if (i < arcs.size() - 1) {
+						sb.append(" ");
+					}
+				}
 			}
+
 			sb.append("\n");
 		}
 		return sb.toString();
 	}
 
-	// affiche le graphe
 	public void afficherGraphe() {
 		System.out.println(toString());
 	}
