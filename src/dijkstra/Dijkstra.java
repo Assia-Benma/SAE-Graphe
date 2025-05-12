@@ -37,6 +37,44 @@ public class Dijkstra<T> implements ShortestPath<T> {
 
 		//pour tout les autres sommets
 
+		// boucle pour le djikstra
+		while (true){
+			//On essaie de trouvé le sommet non visité avec la plus petite distance
+			T actuel = null;
+			int distanceMin = Integer.MAX_VALUE;
+
+			for(Map.Entry<T, Integer> entrer : distances.entrySet()){
+				T sommet = entrer.getKey();
+				int distance = entrer.getValue();
+
+				if(!marques.contains(sommet) && distance < distanceMin){
+					actuel = sommet;
+					distanceMin = distance;
+				}
+			}
+			// Si tous sommets sont visité on degage de la boucle
+			if(actuel == null){
+				break; // M.Poitrenaud me tuerait pour ça
+			}
+
+			//On dit que le sommet est marque parce qu'on est déjà passée dessu si j'ai bien comprit ce que Ilyes à fait comme structure de données
+			//De toute façon c'est la seule HashSet qui sert a stocker si j'ai bien comprie (?)
+			marques.add(actuel);
+
+			//Maintenant on met a jour avec les distance adjacent
+			for(Graph.graph.Arc<T> arc : g.getSucc(actuel)){
+				T voisin = arc.dst();
+				if(arc.val() < 0)
+					throw new IllegalArgumentException("Dans dijkstra on ne prend pas de valuation négatif !");
+				int nouvelleDistance = distanceMin + arc.val();
+
+				//On voit si la new distance est mieux (Ou cas ou j'oublie le Integer.MAX c'est le signe infini qu'on mettait pour le tableau)
+				if(nouvelleDistance < distances.getOrDefault(voisin,Integer.MAX_VALUE)){
+					distances.put(voisin,nouvelleDistance);
+					predecesseurs.put(voisin,actuel);
+				}
+			}
+		}
 		return new Distances<>(distances,predecesseurs);
 	}
 
