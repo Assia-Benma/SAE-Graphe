@@ -20,7 +20,7 @@ public class Checker {
 		if (args.length >0)
 			throw new IllegalArgumentException("aucun argument attendu");
 
-		File benchDir = new File("bench");
+		File benchDir = new File("src/bench");
 		if (!benchDir.exists() || !benchDir.isDirectory()) {
 			System.out.println("Le répertoire 'bench' est introuvable ou n'est pas un répertoire.");
 			return;
