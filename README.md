@@ -19,5 +19,5 @@ Groupe 105
   - Le programme passe les tests de Checker fournis sur Moodle avec tous les labyrinthes du dossier `bench`.
 
 - **Ce qui ne marche pas / limitations éventuelles :**
-  - [Exemple : L’animation dans Animation.java ne fonctionne pas pour les très grands labyrinthes.]
-  - [Exemple : Certains labyrinthes non conformes au format attendu peuvent poser problème.]
+  - L’animation dans Animation.java ne fonctionne pas pour les très grands labyrinthes.
+  - Certains labyrinthes non conformes au format attendu peuvent poser problème.
