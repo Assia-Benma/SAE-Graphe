@@ -9,11 +9,11 @@ import graph.Graph;
 import graph.GrapheHHAdj;
 import graph.ShortestPath.Distances;
 import graph.VarGraph;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 
 
-class DijkstraTest {
+public class DijkstraTest {
 	private static final String GRAPH1 = "A-B(6), A-C(1), A-D(2), B-E(1), C-E(4), D-B(1), E-F(1)";
 	private static final String GRAPH_NEG = "A-B(6), A-C(1), A-D(2), B-E(-3), C-E(4), D-B(1), E-F(1)"; // B-E negatif !
 	private static final String FROM = "A";
@@ -23,7 +23,7 @@ class DijkstraTest {
 	private static final Dijkstra<String> dijkstra = new Dijkstra<>();
 
 	@Test
-	void test() {
+    public void test() {
 		VarGraph g = new GrapheHHAdj();
 		g.peupler(GRAPH1);
 		tester(g);
@@ -41,7 +41,7 @@ class DijkstraTest {
 	}
 
 	@Test
-	void pasDeValuationNegative() {
+    public void pasDeValuationNegative() {
 		VarGraph g = new GrapheHHAdj();
 		g.peupler(GRAPH_NEG);
 		assertThrows(IllegalArgumentException.class,
@@ -49,7 +49,7 @@ class DijkstraTest {
 	}
 
 	@Test
-	void utilisationDuResultat() {
+    public void utilisationDuResultat() {
 		 VarGraph g = new GrapheHHAdj();
 		 g.peupler(GRAPH1);
 		 Distances<String> dst = dijkstra.compute(g, FROM);
