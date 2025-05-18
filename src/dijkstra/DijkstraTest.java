@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import graphe.Graph;
-import graphe.GrapheHHAdj;
-import graphe.ShortestPath.Distances;
-import graphe.VarGraph;
+import graph.Graph;
+import graph.GrapheHHAdj;
+import graph.ShortestPath.Distances;
+import graph.VarGraph;
 import org.junit.jupiter.api.Test;
 
 
@@ -47,6 +47,7 @@ class DijkstraTest {
 		assertThrows(IllegalArgumentException.class,
 				()->  dijkstra.compute(g, FROM));
 	}
+
 	@Test
 	void utilisationDuResultat() {
 		 VarGraph g = new GrapheHHAdj();
