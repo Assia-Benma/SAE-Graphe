@@ -57,7 +57,7 @@ public class Animation {
 	public static void main(String[] args) {
 		if (args.length >0)
 			throw new IllegalArgumentException("aucun argument attendu");
-		File benchDir = new File("src/bench");
+		File benchDir = new File("bench");
 		if (!benchDir.exists() || !benchDir.isDirectory()) {
 			System.out.println("Le répertoire 'bench' est introuvable ou n'est pas un répertoire.");
 			return;
